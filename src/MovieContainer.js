@@ -20,7 +20,9 @@ const MovieContainer = ({movies}) => {
 
   return (
     <div className='movie-container'>
-      {moviePosters}
+      {/* <div className='container'> */}
+        {moviePosters}
+      {/* </div> */}
     </div>
   )
 
