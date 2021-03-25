@@ -19,7 +19,7 @@ class App extends Component {
     return (
       <main className="App">
         <h1>Rancid Tomatillos</h1>
-        { this.state.displayMovieDetails && <MovieDetailsCard movie={this.state.displayMovieDetails.movie} />}
+        { this.state.displayMovieDetails && <MovieDetailsCard movie={this.state.displayMovieDetails} />}
         <MovieContainer movies={this.state.movies} displayMovieDetails={this.displayMovieDetails} />
       </main>
     )
