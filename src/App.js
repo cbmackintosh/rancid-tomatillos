@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import React, { Component } from 'react';
 import './App.css';
 import movieData from './data'
@@ -20,7 +19,7 @@ class App extends Component {
       <main className="App">
         <h1>Rancid Tomatillos</h1>
         { this.state.displayMovieDetails && <MovieDetailsCard movie={this.state.displayMovieDetails} />}
-        <MovieContainer movies={this.state.movies} displayMovieDetails={this.displayMovieDetails} />
+        { !this.state.displayMovieDetails && <MovieContainer movies={this.state.movies} displayMovieDetails={this.displayMovieDetails} />}  
       </main>
     )
   }
