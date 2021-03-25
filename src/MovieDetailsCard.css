@@ -11,3 +11,8 @@
   flex-direction: column;
   text-align: left;
 }
+
+.close-button {
+  width: 2%;
+  align-self: flex-end;
+}
