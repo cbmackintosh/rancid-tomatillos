@@ -3,11 +3,15 @@ import React, { Component } from 'react';
 import './App.css';
 import movieData from './data'
 import MovieContainer from './MovieContainer'
+import MovieDetailsCard from './MovieDetailsCard'
 
 class App extends Component {
   constructor() {
     super()
-    this.state = movieData
+    this.state = {
+      movies: movieData.movies,
+      displayMovieDetails: null
+    }
   }
 
   render() {
@@ -15,26 +19,18 @@ class App extends Component {
     return (
       <main className="App">
         <h1>Rancid Tomatillos</h1>
-        <MovieContainer movies={this.state.movies} />
+        { this.state.displayMovieDetails && <MovieDetailsCard movie={this.state.displayMovieDetails.movie} />}
+        <MovieContainer movies={this.state.movies} displayMovieDetails={this.displayMovieDetails} />
       </main>
-      // <div className="App">
-      //   <header className="App-header">
-      //     <img src={logo} className="App-logo" alt="logo" />
-      //     <p>
-      //       Edit <code>src/App.js</code> and save to reload.
-      //     </p>
-      //     <a
-      //       className="App-link"
-      //       href="https://reactjs.org"
-      //       target="_blank"
-      //       rel="noopener noreferrer"
-      //     >
-      //       Learn React
-      //     </a>
-      //   </header>
-      // </div>
-    );
+    )
   }
+
+  displayMovieDetails = (id) => {
+    this.setState({
+      displayMovieDetails: this.state.movies.find(movie => movie.id === id)
+    })
+  }
+
 }
 
 export default App;
