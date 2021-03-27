@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { fetchAllMovies } from '../APICalls'
+import { fetchAllMovies, fetchMovieDetails } from '../APICalls'
 import MovieContainer from '../container/MovieContainer'
 import MovieDetailsCard from '../details/MovieDetailsCard'
 
@@ -27,9 +27,15 @@ class App extends Component {
   }
 
   displayMovieDetails = (id) => {
-    this.setState({
-      displayMovieDetails: this.state.movies.find(movie => movie.id === id)
+    fetchMovieDetails(id)
+    .then(movieDetails => {
+      this.setState({
+        displayMovieDetails: movieDetails.movie
+      })
     })
+    // this.setState({
+    //   displayMovieDetails: this.state.movies.find(movie => movie.id === id)
+    // })
   }
 
   displayMovieLibrary = () => {
