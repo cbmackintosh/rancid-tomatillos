@@ -25,37 +25,31 @@ class App extends Component {
     )
   }
 
-  displayMovieDetails = (id) => {
-    fetchMovieDetails(id)
-    .then(movieDetails => {
-      this.setState({
-        displayMovieDetails: movieDetails.movie
-      })
-    })
-  }
-
   displayMovieLibrary = () => {
     this.setState({
       displayMovieDetails: null
     })
   }
 
-  checkForErrors = response => {
-    if (!response.ok) {
-      this.setState( {error: 'Oop, that/s no good 😅'} )
-    } else {
-      return response.json();
-    }
+  displayMovieDetails = (id) => {
+    fetchMovieDetails(id)
+      .then(movieDetails => this.setState({displayMovieDetails: movieDetails.movie}))
+      .catch(err => this.setState({ error: 'There was a problem loading this title. Try again later.'}))
   }
 
   componentDidMount() {
     fetchAllMovies()
-    .then(allMovies => {
-      this.setState({
-        movies: allMovies.movies
-      })
-    })
+      .then(movieData => this.setState({movies: movieData.movies}))
+      .catch(err => this.setState({ error: 'Oh wow. This is embarassing. Try again later? 😅'}))
   }
+
+  // checkForErrors = response => {
+  //   if (!response.ok) {
+  //     this.setState( {error: 'Oop, that/s no good 😅'} )
+  //   } else {
+  //     return response.json();
+  //   }
+  // }
 
 }
 
