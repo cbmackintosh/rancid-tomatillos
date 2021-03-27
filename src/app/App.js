@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import movieData from '../data'
+import { fetchAllMovies } from '../APICalls'
 import MovieContainer from '../container/MovieContainer'
 import MovieDetailsCard from '../details/MovieDetailsCard'
 
@@ -47,14 +47,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
-      .then(this.checkForErrors)
-      .then(data => {
-        this.setState( {
-          movies: data.movies
-        })
+    fetchAllMovies()
+    .then(allMovies => {
+      this.setState({
+        movies: allMovies.movies
       })
-      .catch(err => this.setState({ error: 'Oh wow. This is embarassing. Try again later? 😅' }))
+    })
   }
 
 }
