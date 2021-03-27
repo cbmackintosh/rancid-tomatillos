@@ -40,8 +40,7 @@ class App extends Component {
 
   checkForErrors = response => {
     if (!response.ok) {
-      console.log('in the if block')
-      return this.setState( {error: 'Oop, that/s no good 😅'} )
+      this.setState( {error: 'Oop, that/s no good 😅'} )
     } else {
       return response.json();
     }
@@ -54,7 +53,6 @@ class App extends Component {
         this.setState( {
           movies: data.movies
         })
-        console.log(this.state.movies)
       })
       .catch(err => this.setState({ error: 'Oh wow. This is embarassing. Try again later? 😅' }))
   }
