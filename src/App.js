@@ -8,7 +8,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      movies: movieData.movies,
+      movies: [],
       displayMovieDetails: null
     }
   }
@@ -19,7 +19,7 @@ class App extends Component {
       <main className="App">
         <h1>Rancid Tomatillos</h1>
         { this.state.displayMovieDetails && <MovieDetailsCard movie={this.state.displayMovieDetails} displayMovieLibrary={this.displayMovieLibrary} />}
-        { !this.state.displayMovieDetails && <MovieContainer movies={this.state.movies} displayMovieDetails={this.displayMovieDetails} />}  
+        { !this.state.displayMovieDetails && <MovieContainer movies={this.state.movies} displayMovieDetails={this.displayMovieDetails} />}
       </main>
     )
   }
@@ -34,6 +34,16 @@ class App extends Component {
     this.setState({
       displayMovieDetails: null
     })
+  }
+
+  componentDidMount() {
+    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
+      .then(response => response.json())
+      .then(data => {
+        this.setState( {
+          movies: data.movies
+        })
+      })
   }
 
 }
