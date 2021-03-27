@@ -1,5 +1,5 @@
 import React from 'react'
-import MoviePoster from './MoviePoster'
+import MoviePoster from '../poster/MoviePoster'
 import './MovieContainer.css'
 
 const MovieContainer = ({movies, displayMovieDetails}) => {
