@@ -11,7 +11,6 @@ class MovieDetailsCard extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className='movie-details-card' style={{backgroundImage: `url(${this.state.movie.backdrop_path})`}}>
        <div className='movie-details-text'>

@@ -15,7 +15,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <main className="App">
         <h1>Rancid Tomatillos</h1>
@@ -33,9 +32,6 @@ class App extends Component {
         displayMovieDetails: movieDetails.movie
       })
     })
-    // this.setState({
-    //   displayMovieDetails: this.state.movies.find(movie => movie.id === id)
-    // })
   }
 
   displayMovieLibrary = () => {
