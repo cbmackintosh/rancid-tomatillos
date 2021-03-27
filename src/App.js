@@ -9,7 +9,8 @@ class App extends Component {
     super()
     this.state = {
       movies: [],
-      displayMovieDetails: null
+      displayMovieDetails: null,
+      error: ''
     }
   }
 
@@ -18,6 +19,7 @@ class App extends Component {
     return (
       <main className="App">
         <h1>Rancid Tomatillos</h1>
+        {this.state.error && <h2>{this.state.error}</h2>}
         { this.state.displayMovieDetails && <MovieDetailsCard movie={this.state.displayMovieDetails} displayMovieLibrary={this.displayMovieLibrary} />}
         { !this.state.displayMovieDetails && <MovieContainer movies={this.state.movies} displayMovieDetails={this.displayMovieDetails} />}
       </main>
@@ -36,14 +38,24 @@ class App extends Component {
     })
   }
 
+  checkForErrors = response => {
+    if (!response.ok) {
+      console.log('in the if block')
+      return this.setState( {error: 'Oop, that/s no good 😅'} )
+    } else {
+      return response.json();
+    }
+  }
+
   componentDidMount() {
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
-      .then(response => response.json())
+      .then(this.checkForErrors)
       .then(data => {
         this.setState( {
           movies: data.movies
         })
       })
+      .catch(err => this.setState({ error: 'Oh wow. This is embarassing. Try again later? 😅' }))
   }
 
 }
