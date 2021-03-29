@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import movieData from '../data'
+import { fetchAllMovies, fetchMovieDetails } from '../APICalls'
 import MovieContainer from '../container/MovieContainer'
 import MovieDetailsCard from '../details/MovieDetailsCard'
 
@@ -15,7 +15,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <main className="App">
         <h1>Rancid Tomatillos</h1>
@@ -26,36 +25,31 @@ class App extends Component {
     )
   }
 
-  displayMovieDetails = (id) => {
-    this.setState({
-      displayMovieDetails: this.state.movies.find(movie => movie.id === id)
-    })
-  }
-
   displayMovieLibrary = () => {
     this.setState({
       displayMovieDetails: null
     })
   }
 
-  checkForErrors = response => {
-    if (!response.ok) {
-      this.setState( {error: 'Oop, that/s no good 😅'} )
-    } else {
-      return response.json();
-    }
+  displayMovieDetails = (id) => {
+    fetchMovieDetails(id)
+      .then(movieDetails => this.setState({displayMovieDetails: movieDetails.movie}))
+      .catch(err => this.setState({ error: 'There was a problem loading this title. Try again later.'}))
   }
 
   componentDidMount() {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
-      .then(this.checkForErrors)
-      .then(data => {
-        this.setState( {
-          movies: data.movies
-        })
-      })
-      .catch(err => this.setState({ error: 'Oh wow. This is embarassing. Try again later? 😅' }))
+    fetchAllMovies()
+      .then(movieData => this.setState({movies: movieData.movies}))
+      .catch(err => this.setState({ error: 'Oh wow. This is embarassing. Try again later? 😅'}))
   }
+
+  // checkForErrors = response => {
+  //   if (!response.ok) {
+  //     this.setState( {error: 'Oop, that/s no good 😅'} )
+  //   } else {
+  //     return response.json();
+  //   }
+  // }
 
 }
 
