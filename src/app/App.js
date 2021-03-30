@@ -34,7 +34,10 @@ class App extends Component {
   displayMovieDetails = (id) => {
     fetchMovieDetails(id)
       .then(movieDetails => this.setState({displayMovieDetails: movieDetails.movie}))
-      .catch(err => this.setState({ error: 'There was a problem loading this title. Try again later.'}))
+      .catch(err => {
+        console.log(err.message)
+        this.setState({ error: 'There was a problem loading this title. Try again later.'})
+      })
   }
 
   componentDidMount() {
@@ -42,6 +45,12 @@ class App extends Component {
       .then(movieData => this.setState({movies: movieData.movies}))
       .catch(err => this.setState({ error: 'Oh wow. This is embarassing. Try again later? 😅'}))
   }
+
+  // handleErrorResponse(error) {
+  //   if (error >= 400 && error < 500) {
+  //     return: 
+  //   }
+  // }
 
   // checkForErrors = response => {
   //   if (!response.ok) {

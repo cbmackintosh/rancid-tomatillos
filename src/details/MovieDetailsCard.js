@@ -15,7 +15,7 @@ class MovieDetailsCard extends Component {
       <div className='movie-details-card' style={{backgroundImage: `url(${this.state.movie.backdrop_path})`}}>
        <div className='movie-details-text'>
          <button className='close-button' onClick={() => this.state.displayMovieLibrary()}>X</button>
-         <h1>{this.state.movie.title}</h1>
+         <h1 className='movie-title'>{this.state.movie.title}</h1>
          <h2>{this.state.movie.tagline}</h2>
          <p>{this.state.movie.overview}</p>
          <p>{this.formatGenreString(this.state.movie.genres) + ' * ' + this.state.movie.release_date + ' * ' + this.formatRuntimeString(this.state.movie.runtime)}</p>
