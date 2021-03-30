@@ -10,6 +10,7 @@ const MoviePoster = ({id, poster_path, title, displayMovieDetails}) => {
       </div>
     </div>
   )
+
 }
 
 export default MoviePoster
