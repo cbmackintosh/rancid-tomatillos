@@ -46,4 +46,18 @@ describe('Rancid Tomatillos', () => {
     .get('h2').contains('This is a 500 error message on the Movie Details Card')
   })
 
+  it('should provide the user with a way to navigate back to the movie library in the event of an error', () => {
+    cy.intercept({
+      method: 'GET',
+      url: 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919'
+    },
+    {
+      statusCode: 500,
+    })
+    .get('div[id="694919"]').click()
+    .get('button[class="back-button"]').click()
+    cy.get('div[class="movie-details-card"]').should('not.exist')
+    cy.get('div[class="movie-container"]').should('be.visible')
+  })
+
 });
