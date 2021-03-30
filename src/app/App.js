@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import { fetchAllMovies, fetchMovieDetails } from '../APICalls'
 import MovieContainer from '../container/MovieContainer'
@@ -19,9 +20,19 @@ class App extends Component {
     return (
       <main className="App">
         <h1>Rancid Tomatillos</h1>
+        <Route exact path="/" render={() => <MovieContainer movies={this.state.movies} displayMovieDetails={this.displayMovieDetails} /> } />
+        <Route
+          path="/:id"
+          render={({ match }) => {
+            const { id } = match.params
+            console.log(typeof id);
+            const foundMovie = this.state.movies.find(movie => movie.id === parseInt(id))
+            console.log(this.state.movies)
+            console.log(foundMovie)
+            return <MovieDetailsCard movie={foundMovie} displayMovieLibrary={this.displayMovieLibrary} error={this.state.movieDetailsError} />
+          }}
+        />
         {this.state.libraryError && <h2>{this.state.libraryError}</h2>}
-        { this.state.displayMovieDetails && <MovieDetailsCard movie={this.state.displayMovieDetails} displayMovieLibrary={this.displayMovieLibrary} error={this.state.movieDetailsError}/>}
-        { !this.state.displayMovieDetails && <MovieContainer movies={this.state.movies} displayMovieDetails={this.displayMovieDetails} />}
       </main>
     )
   }
@@ -44,7 +55,7 @@ class App extends Component {
   componentDidMount() {
     fetchAllMovies()
       .then(movieData => this.setState({movies: movieData.movies}))
-      .catch(err => this.setState({ libraryError: this.handleErrorResponse(err.message)}))
+      .catch(err => this.setState({ libraryError: this.handleErrorResponse(err.message)}));
   }
 
   handleErrorResponse(error) {
