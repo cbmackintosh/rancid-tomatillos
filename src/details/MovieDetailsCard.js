@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './MovieDetailsCard.css'
 
 class MovieDetailsCard extends Component {
@@ -23,13 +24,15 @@ class MovieDetailsCard extends Component {
       return (
         <div className='movie-details-card' style={{backgroundImage: `url(${this.state.movie.backdrop_path})`}}>
          <div className='movie-details-text'>
-           <button className='close-button' onClick={() => this.state.displayMovieLibrary()}>X</button>
+          <Link to={`/`}>
+            <button className='close-button'>X</button>
+          </Link>
            <h1 className='movie-title'>{this.state.movie.title}</h1>
            <h2>{this.state.movie.tagline}</h2>
            <p>{this.state.movie.overview}</p>
-           <p>{this.formatGenreString(this.state.movie.genres) + ' * ' + this.state.movie.release_date + ' * ' + this.formatRuntimeString(this.state.movie.runtime)}</p>
+           {/*<p>{this.formatGenreString(this.state.movie.genres) + ' * ' + this.state.movie.release_date + ' * ' + this.formatRuntimeString(this.state.movie.runtime)}</p>*/}
            <p>AVERAGE RATING: {this.state.movie.average_rating.toFixed(2)}</p>
-           <table>
+           {/*<table>
             <thead>
               <tr>
                 <th>BUDGET</th>
@@ -41,12 +44,12 @@ class MovieDetailsCard extends Component {
                 <td>${this.state.movie.budget.toLocaleString()}</td>
                 <td>${this.state.movie.revenue.toLocaleString()}</td>
               </tr>
-            </tbody> 
-           </table>
+            </tbody>
+           </table>*/}
         </div>
        </div>
       )
-    }   
+    }
   }
 
   handleErrorResponse(error) {

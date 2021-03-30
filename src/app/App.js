@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import { fetchAllMovies, fetchMovieDetails } from '../APICalls'
 import MovieContainer from '../container/MovieContainer'
-import MovieDetailsCard from '../details/MovieDetailsCard'
+import MovieDetailsCard from '../details/MovieDetailsCard';
 
 class App extends Component {
   constructor() {
@@ -22,16 +22,16 @@ class App extends Component {
         <h1>Rancid Tomatillos</h1>
         <Route exact path="/" render={() => <MovieContainer movies={this.state.movies} displayMovieDetails={this.displayMovieDetails} /> } />
         <Route
-          path="/:id"
-          render={({ match }) => {
-            const { id } = match.params
-            console.log(typeof id);
-            const foundMovie = this.state.movies.find(movie => movie.id === parseInt(id))
-            console.log(this.state.movies)
-            console.log(foundMovie)
-            return <MovieDetailsCard movie={foundMovie} displayMovieLibrary={this.displayMovieLibrary} error={this.state.movieDetailsError} />
-          }}
-        />
+            path="/:id"
+            render={({ match }) => {
+              if (this.state.movies.length > 0) {
+                const { id } = match.params
+                let foundMovie = this.state.movies.find(movie => movie.id === parseInt(id))
+                return <MovieDetailsCard movie={foundMovie} displayMovieLibrary={this.displayMovieLibrary} error={this.state.movieDetailsError} />
+              }
+             }
+            }
+          />
         {this.state.libraryError && <h2>{this.state.libraryError}</h2>}
       </main>
     )
