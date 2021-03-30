@@ -22,19 +22,19 @@ describe('App', () => {
         statusCode: 422,
       })
       cy.visit('http://localhost:3000')
-      .get('h2').should('contain', 'Oh wow. This is embarassing. Try again later? 😅')
+      .get('h2').contains('This is a 400 error message on the Movie Library Page')
   })
 
-  // it('should show an informative error', () => {
-  //   cy.intercept({
-  //       method: 'GET',
-  //       url: 'https://rancid-tomatillos.herokuapp.com/api/v2/movies'
-  //     },
-  //     {
-  //       statusCode: 500,
-  //     })
-  //     cy.visit('http://localhost:3000')
-  //     .get('h2').should('contain', 'Oop, that/s no good 😅')
-  // })
+  it.skip('should show an informative error', () => {
+    cy.intercept({
+        method: 'GET',
+        url: 'https://rancid-tomatillos.herokuapp.com/api/v2/movies'
+      },
+      {
+        statusCode: 500,
+      })
+      cy.visit('http://localhost:3000')
+      .get('h2').contains('This is a 500 error message on the Movie Library Page')
+  })
 
 });

@@ -31,10 +31,10 @@ describe('Rancid Tomatillos', () => {
       statusCode: 404,
     })
     .get('div[id="694919"]').click()
-    .get('h2').contains('There was a problem loading this title. Try again later.')
+    .get('h2').contains('This is a 400 error message on the Movie Details Card')
   })
 
-  it('should display an appropriate error message if the network request returns a 400 error', () => {
+  it('should display an appropriate error message if the network request returns a 500 error', () => {
     cy.intercept({
       method: 'GET',
       url: 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919'
@@ -43,7 +43,7 @@ describe('Rancid Tomatillos', () => {
       statusCode: 500,
     })
     .get('div[id="694919"]').click()
-    .get('h2').contains('There was a problem loading this title. Try again later.')
+    .get('h2').contains('This is a 500 error message on the Movie Details Card')
   })
 
 });

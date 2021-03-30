@@ -2,7 +2,7 @@ const baseURL = 'https://rancid-tomatillos.herokuapp.com/api/v2/movies'
 
 export const fetchAllMovies = () => {
   return fetch(`${baseURL}`)
-    .then(response => response.json())
+    .then(checkForErrors)
 }
 
 export const fetchMovieDetails = (id) => {
