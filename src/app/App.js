@@ -4,6 +4,7 @@ import './App.css';
 import { fetchAllMovies } from '../APICalls'
 import MovieContainer from '../container/MovieContainer'
 import MovieDetailsCard from '../details/MovieDetailsCard';
+import Form from '../search/Form';
 
 export default class App extends Component {
   constructor() {
@@ -19,10 +20,11 @@ export default class App extends Component {
       return (
         <main className="App">
           <h1>Rancid Tomatillos</h1>
+          <Form filterMovies={this.filterMovies}/>
           <Switch>
             <Route exact path="/" render={() => <MovieContainer movies={this.state.movies} /> } />
             <Route path="/:id" render={(props) => <MovieDetailsCard movieID={props.match.params.id} /> } />
-          </Switch>  
+          </Switch>
         </main>
       )
     } else {
@@ -43,6 +45,12 @@ export default class App extends Component {
     } else {
       return 'This is a 500 error message on the Movie Library Page'
     }
+  }
+
+  filterMovies = (query) => {
+    const filteredList = this.state.movies.filter(movie => movie.title.includes(query))
+
+    this.setState({ movies: filteredList})
   }
 
 }
