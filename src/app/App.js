@@ -30,6 +30,7 @@ export default class App extends Component {
     }
   }
 
+
   componentDidMount() {
     fetchAllMovies()
       .then(movieData => this.setState({movies: movieData.movies}))
