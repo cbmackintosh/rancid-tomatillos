@@ -10,8 +10,9 @@ class Form extends Component {
   }
 
   handleChange = event => {
-    this.setState({ searchInput: event.target.value });
-    return this.props.filterMovies(this.state.searchInput)
+    this.setState({ [event.target.name]: event.target.value}, () => {
+      this.props.filterMovies(this.state.searchInput)
+    });
   }
 
   render() {
@@ -20,15 +21,13 @@ class Form extends Component {
         <input
           type='text'
           placeholder='Search for movies'
-          name='search bar'
+          name='searchInput'
           value={this.state.searchInput}
           onChange={event => this.handleChange(event)}
         />
       </form>
     )
   }
-
-//Want to search by title, overview, and genre
 
 }
 

@@ -11,6 +11,7 @@ export default class App extends Component {
     super()
     this.state = {
       movies: [],
+      searchResults: [],
       error: null
     }
   }
@@ -22,7 +23,7 @@ export default class App extends Component {
           <h1>Rancid Tomatillos</h1>
           <Form filterMovies={this.filterMovies}/>
           <Switch>
-            <Route exact path="/" render={() => <MovieContainer movies={this.state.movies} /> } />
+            <Route exact path="/" render={() => <MovieContainer movies={this.selectLibrary()} /> } />
             <Route path="/:id" render={(props) => <MovieDetailsCard movieID={props.match.params.id} /> } />
           </Switch>
         </main>
@@ -48,9 +49,18 @@ export default class App extends Component {
   }
 
   filterMovies = (query) => {
+    //Want to search by title, overview, and genre
     const filteredList = this.state.movies.filter(movie => movie.title.includes(query))
 
-    this.setState({ movies: filteredList})
+    this.setState({ searchResults: filteredList })
+  }
+
+  selectLibrary = () => {
+    if (this.state.searchResults.length) {
+      return this.state.searchResults;
+    } else {
+      return this.state.movies;
+    }
   }
 
 }
