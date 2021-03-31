@@ -1,61 +1,39 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import { fetchAllMovies, fetchMovieDetails } from '../APICalls'
+import { fetchAllMovies } from '../APICalls'
 import MovieContainer from '../container/MovieContainer'
 import MovieDetailsCard from '../details/MovieDetailsCard';
 
-class App extends Component {
+export default class App extends Component {
   constructor() {
     super()
     this.state = {
       movies: [],
-      displayMovieDetails: null,
-      libraryError: '',
-      movieDetailsError: ''
+      error: null
     }
   }
 
   render() {
-    return (
-      <main className="App">
-        <h1>Rancid Tomatillos</h1>
-        <Route exact path="/" render={() => <MovieContainer movies={this.state.movies} displayMovieDetails={this.displayMovieDetails} /> } />
-        <Route
-            path="/:id"
-            render={({ match }) => {
-              if (this.state.movies.length > 0) {
-                const { id } = match.params
-                let foundMovie = this.state.movies.find(movie => movie.id === parseInt(id))
-                return <MovieDetailsCard movie={foundMovie} displayMovieLibrary={this.displayMovieLibrary} error={this.state.movieDetailsError} />
-              }
-             }
-            }
-          />
-        {this.state.libraryError && <h2>{this.state.libraryError}</h2>}
-      </main>
-    )
-  }
-
-  displayMovieLibrary = () => {
-    this.setState({
-      displayMovieDetails: null
-    })
-  }
-
-  displayMovieDetails = (id) => {
-    fetchMovieDetails(id)
-      .then(movieDetails => this.setState({displayMovieDetails: movieDetails.movie}))
-      .catch(err => this.setState({
-        displayMovieDetails: 'error',
-        movieDetailsError: err.message
-      }))
+    if (!this.state.error) {
+      return (
+        <main className="App">
+          <h1>Rancid Tomatillos</h1>
+          <Switch>
+            <Route exact path="/" render={() => <MovieContainer movies={this.state.movies} /> } />
+            <Route path="/:id" render={(props) => <MovieDetailsCard movieID={props.match.params.id} /> } />
+          </Switch>  
+        </main>
+      )
+    } else {
+      return (<h2>{this.state.error}</h2>)
+    }
   }
 
   componentDidMount() {
     fetchAllMovies()
       .then(movieData => this.setState({movies: movieData.movies}))
-      .catch(err => this.setState({ libraryError: this.handleErrorResponse(err.message)}));
+      .catch(err => this.setState({ error: this.handleErrorResponse(err.message)}));
   }
 
   handleErrorResponse(error) {
@@ -67,5 +45,3 @@ class App extends Component {
   }
 
 }
-
-export default App;
