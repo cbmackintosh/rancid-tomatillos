@@ -25,7 +25,7 @@ describe('App', () => {
       .get('h2').contains('This is a 400 error message on the Movie Library Page')
   })
 
-  it.skip('should show an informative error', () => {
+  it('should show an informative error', () => {
     cy.intercept({
         method: 'GET',
         url: 'https://rancid-tomatillos.herokuapp.com/api/v2/movies'
