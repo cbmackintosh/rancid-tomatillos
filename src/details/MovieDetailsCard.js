@@ -47,7 +47,7 @@ class MovieDetailsCard extends Component {
       return (
         <div>
           <h2>{this.state.error}</h2>
-          <Link to={`/`}><button className='backbutton'>BACK</button></Link>
+          <Link to={`/`}><button className='back-button'>BACK</button></Link>
         </div>
       )
     }
