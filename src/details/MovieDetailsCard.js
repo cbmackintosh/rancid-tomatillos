@@ -1,55 +1,62 @@
 import React, { Component } from 'react';
+import { fetchMovieDetails } from '../APICalls'
 import { Link } from 'react-router-dom';
 import './MovieDetailsCard.css'
 
 class MovieDetailsCard extends Component {
-  constructor({ movie, displayMovieLibrary, error }) {
+  constructor({ movieID }) {
     super()
     this.state = {
-      movie: movie,
-      displayMovieLibrary: displayMovieLibrary,
-      error: error
+      id: movieID,
+      movie: null,
+      error: null
     }
   }
 
   render() {
-    if(this.state.error) {
-      return (
-        <div>
-          <h2>{this.handleErrorResponse(this.state.error)}</h2>
-          <button className='back-button' onClick={() => this.state.displayMovieLibrary()}>BACK</button>
-        </div>
-      )
-    } else {
+    if(this.state.movie && !this.state.error) {
       return (
         <div className='movie-details-card' style={{backgroundImage: `url(${this.state.movie.backdrop_path})`}}>
-         <div className='movie-details-text'>
-          <Link to={`/`}>
-            <button className='close-button'>X</button>
-          </Link>
-           <h1 className='movie-title'>{this.state.movie.title}</h1>
-           <h2>{this.state.movie.tagline}</h2>
-           <p>{this.state.movie.overview}</p>
-           {/*<p>{this.formatGenreString(this.state.movie.genres) + ' * ' + this.state.movie.release_date + ' * ' + this.formatRuntimeString(this.state.movie.runtime)}</p>*/}
-           <p>AVERAGE RATING: {this.state.movie.average_rating.toFixed(2)}</p>
-           {/*<table>
-            <thead>
-              <tr>
-                <th>BUDGET</th>
-                <th>REVENUE</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>${this.state.movie.budget.toLocaleString()}</td>
-                <td>${this.state.movie.revenue.toLocaleString()}</td>
-              </tr>
-            </tbody>
-           </table>*/}
+          <div className='movie-details-text'>
+            <Link className='close-link' to={`/`}><button className='close-button'>X</button></Link>
+            <h1 className='movie-title'>{this.state.movie.title}</h1>
+            {this.state.movie.tagline && <h2>{this.state.movie.tagline}</h2>}
+            <p>{this.state.movie.overview}</p>
+            <p>{this.formatGenreString(this.state.movie.genres) + ' * ' + this.state.movie.release_date + ' * ' + this.formatRuntimeString(this.state.movie.runtime)}</p>
+            <p>AVERAGE RATING: {this.state.movie.average_rating.toFixed(2)}</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>BUDGET</th>
+                  <th>REVENUE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>${this.state.movie.budget.toLocaleString()}</td>
+                  <td>${this.state.movie.revenue.toLocaleString()}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-       </div>
+      )
+    } else if (!this.state.movie && !this.state.error) {
+      return (<h2>Loading...</h2>)
+    } else if (!this.state.movie && this.state.error) {
+      return (
+        <div>
+          <h2>{this.state.error}</h2>
+          <Link to={`/`}><button className='backbutton'>BACK</button></Link>
+        </div>
       )
     }
+  }
+
+  componentDidMount() {
+    fetchMovieDetails(this.state.id)
+    .then(movieDetails => this.setState({movie: movieDetails.movie}))
+    .catch(err => this.setState({error: this.handleErrorResponse(err.message)}))
   }
 
   handleErrorResponse(error) {
@@ -70,7 +77,6 @@ class MovieDetailsCard extends Component {
     let minutes = runtime - (hours * 60) < 10 ? `0${runtime - (hours * 60)}` : runtime - (hours * 60)
     return `${hours}h ${minutes}m`
   }
-
 }
 
 export default MovieDetailsCard
