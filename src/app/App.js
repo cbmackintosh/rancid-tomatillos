@@ -50,8 +50,8 @@ export default class App extends Component {
 
   filterMovies = (query) => {
     //Want to search by title, overview, and genre
-    const filteredList = this.state.movies.filter(movie => movie.title.includes(query))
-    // console.log(filteredList)
+    const filteredList = this.state.movies.filter(movie => movie.title.toUpperCase().includes(query.toUpperCase()))
+    console.log(filteredList)
     // if(filteredList.length === 0) {
     //   this.setState({ error: 'No results' })
     // } else {
