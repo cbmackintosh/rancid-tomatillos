@@ -40,13 +40,32 @@ describe('Rancid Tomatillos', () => {
 
   beforeEach(() => {
     cy.visit('http://localhost:3000');
-  })
+  });
 
   it('should be able to click on a single movie poster to display that movies details', () => {
-    cy.get('div[id="694919"]').click()
-    .get('div[class="movie-details-card"]').should('be.visible')
-    .get('h1[class="movie-title"]').contains('Money Plane')
-  })
+    cy.fixture('data').then(data => {
+
+      cy.get('div[id="694919"]').click()
+      .get('div[class="movie-details-card"]').should('be.visible')
+
+      let movieOne = data.movieDetails[0];
+
+      cy.get('h1[class="movie-title"]').contains(movieOne.title)
+      cy.get('p').contains(movieOne.overview)
+      cy.get('p').contains('Action * 2020-09-29 * 1h 22m')
+      cy.get('p').contains(movieOne.average_rating)
+      cy.get('td').contains(movieOne.budget)
+      cy.get('td').contains(movieOne.revenue)
+
+      cy.get('button[class="close-button"]').click()
+
+      cy.get('div[id="539885"]').click()
+      .get('div[class="movie-details-card"]').should('be.visible')
+
+      .get('h1[class="movie-title"]').contains(data.movieDetails[1].title)
+      .get('h2').contains(data.movieDetails[1].tagline)
+    });
+  });
 
   it('should hide the movie poster library when a movie details card is being displayed', () => {
     cy.get('div[id="694919"]').click()
