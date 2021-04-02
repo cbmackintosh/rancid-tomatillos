@@ -1,6 +1,7 @@
 .movie-details-card {
   background-size: cover;
-  height: 90vh;
+  height: 88vh;
+  margin: 20px;
 }
 
 .movie-details-text {
@@ -10,9 +11,32 @@
   display: flex;
   flex-direction: column;
   text-align: left;
+  overflow: scroll;
+}
+
+.movie-title,
+h2,
+p,
+table {
+  width: 60%;
+  margin: 20px;
 }
 
 .close-link {
-  width: 2%;
   align-self: flex-end;
+}
+
+.close-button {
+  opacity: 30%;
+  border: 2px solid rgba(255, 255, 255, 0);
+  border-radius: 10px;
+  margin: 10px;
+  width: 40px;
+  height: 40px;
+  font-size: 15px;
+}
+
+.close-button:hover {
+  opacity: 100%;
+  background-color: white;
 }
