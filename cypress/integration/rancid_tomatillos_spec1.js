@@ -60,9 +60,7 @@ describe('Rancid Tomatillos', () => {
       cy.get('button[class="close-button"]').click()
 
       cy.get('div[id="539885"]').click()
-      .get('div[class="movie-details-card"]').should('be.visible')
-
-      .get('h1[class="movie-title"]').contains(data.movieDetails[1].title)
+      .get('div[class="movie-details-card"]')
       .get('h2').contains(data.movieDetails[1].tagline)
     });
   });
