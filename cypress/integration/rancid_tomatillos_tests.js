@@ -68,13 +68,13 @@ describe('Rancid Tomatillos', () => {
   it('should hide the movie poster library when a movie details card is being displayed', () => {
     cy.get('div[id="694919"]').click()
     cy.get('div[class="movie-container"]').should('not.exist')
-  })
+  });
 
   it('should be able to click on the x button to close the movie details card and return to the all movie library', () => {
     cy.get('div[id="694919"]').click().get('button[class="close-button"]').click()
     cy.get('div[class="movie-details-card"]').should('not.exist')
     cy.get('div[class="movie-container"]').should('be.visible')
-  })
+  });
 
   it('should display an appropriate error message if the network request returns a 400 error', () => {
     cy.intercept({
@@ -86,7 +86,7 @@ describe('Rancid Tomatillos', () => {
     })
     .get('div[id="694919"]').click()
     .get('h2').contains('This is a 400 error message on the Movie Details Card')
-  })
+  });
 
   it('should display an appropriate error message if the network request returns a 500 error', () => {
     cy.intercept({
@@ -98,7 +98,7 @@ describe('Rancid Tomatillos', () => {
     })
     .get('div[id="694919"]').click()
     .get('h2').contains('This is a 500 error message on the Movie Details Card')
-  })
+  });
 
   it('should provide the user with a way to navigate back to the movie library in the event of an error', () => {
     cy.intercept({
@@ -112,6 +112,5 @@ describe('Rancid Tomatillos', () => {
     .get('button[class="back-button"]').click()
     cy.get('div[class="movie-details-card"]').should('not.exist')
     cy.get('div[class="movie-container"]').should('be.visible')
-  })
-
+  });
 });
