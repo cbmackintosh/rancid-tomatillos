@@ -1,31 +1,31 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import { fetchAllMovies } from '../APICalls'
 import MovieContainer from '../container/MovieContainer'
 import MovieDetailsCard from '../details/MovieDetailsCard';
-import Form from '../search/Form';
+
 
 export default class App extends Component {
   constructor() {
     super()
     this.state = {
       movies: [],
-      searchResults: [],
+      searchResults: null,
       error: null
     }
   }
 
   render() {
     if (!this.state.error) {
+      console.log(this.state)
       return (
         <main className="App">
           <h1>Rancid Tomatillos</h1>
-          <Form filterMovies={this.filterMovies}/>
           <Switch>
-            <Route exact path="/" render={() => <MovieContainer movies={this.selectLibrary()} /> } />
+            <Route exact path="/" render={() => <MovieContainer movies={this.selectLibrary()} filterMovies={this.filterMovies}/> } />
             <Route path="/:id" render={(props) => <MovieDetailsCard movieID={props.match.params.id} /> } />
-          </Switch>
+          </Switch> 
         </main>
       )
     } else {
@@ -37,7 +37,7 @@ export default class App extends Component {
   componentDidMount() {
     fetchAllMovies()
       .then(movieData => this.setState({movies: movieData.movies}))
-      .catch(err => this.setState({ error: this.handleErrorResponse(err.message)}));
+      .catch(err => this.setState({ error: this.handleErrorResponse(err.message)})); 
   }
 
   handleErrorResponse(error) {
@@ -49,22 +49,15 @@ export default class App extends Component {
   }
 
   filterMovies = (query) => {
-    //Want to search by title, overview, and genre
     const filteredList = this.state.movies.filter(movie => movie.title.toUpperCase().includes(query.toUpperCase()))
-    console.log(filteredList)
-    // if(filteredList.length === 0) {
-    //   this.setState({ error: 'No results' })
-    // } else {
-    //   this.setState({ searchResults: filteredList })
-    // }
-    this.setState({ searchResults: filteredList })
+    this.setState( { searchResults: filteredList })
   }
 
   selectLibrary = () => {
-    if (this.state.searchResults.length) {
+    if (this.state.searchResults) {
       return this.state.searchResults;
     } else {
-      return this.state.movies;
+      return this.state.movies
     }
   }
 

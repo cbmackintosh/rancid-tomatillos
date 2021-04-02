@@ -1,9 +1,10 @@
 import React from 'react'
 import MoviePoster from '../poster/MoviePoster'
 import './MovieContainer.css'
+import Form from '../search/Form';
 
-const MovieContainer = ({ movies }) => {
-
+const MovieContainer = ({ movies, filterMovies }) => {
+  
   const moviePosters = movies.map(movie => {
     return(
       <MoviePoster
@@ -16,9 +17,13 @@ const MovieContainer = ({ movies }) => {
   })
 
   return (
-    <div className='movie-container'>
-      {moviePosters}
+    <div>
+      <Form filterMovies={filterMovies} />
+      <div className='movie-container'>
+        {moviePosters.length ? moviePosters : <h2>No results</h2>}
+      </div>
     </div>
+    
   )
 
 }
