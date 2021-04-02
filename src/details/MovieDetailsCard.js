@@ -54,7 +54,7 @@ class MovieDetailsCard extends Component {
   }
 
   componentDidMount() {
-    fetchMovieDetails(this.state.id)
+    fetchMovieInfo(this.state.id)
     .then(movieDetails => this.setState({movie: movieDetails.movie}))
     .catch(err => this.setState({error: this.handleErrorResponse(err.message)}))
   }
