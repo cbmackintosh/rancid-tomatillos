@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import { fetchAllMovies } from '../APICalls'
+import { fetchMovieInfo } from '../APICalls'
 import MovieContainer from '../container/MovieContainer'
 import MovieDetailsCard from '../details/MovieDetailsCard';
 
@@ -39,7 +39,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    fetchAllMovies()
+    fetchMovieInfo()
       .then(movieData => this.setState({movies: movieData.movies, isLoaded: true }))
       .catch(err => this.setState({ error: this.handleErrorResponse(err.message) })); 
   }
