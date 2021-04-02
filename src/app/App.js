@@ -17,8 +17,10 @@ export default class App extends Component {
   }
 
   render() {
-    if (!this.state.error) {
-      return (
+    if (this.state.error) {
+      return (<h2>{this.state.error}</h2>)
+    }
+    return (
         <main className="App">
           <h1>Rancid Tomatillos</h1>
           <Form filterMovies={this.filterMovies}/>
@@ -27,10 +29,7 @@ export default class App extends Component {
             <Route path="/:id" render={(props) => <MovieDetailsCard movieID={props.match.params.id} /> } />
           </Switch>
         </main>
-      )
-    } else {
-      return (<h2>{this.state.error}</h2>)
-    }
+    )
   }
 
 
