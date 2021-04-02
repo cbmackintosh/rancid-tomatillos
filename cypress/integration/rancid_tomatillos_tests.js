@@ -160,7 +160,7 @@ describe('Rancid Tomatillos', () => {
       cy.get('form').should('not.exist')
     });
 
-    it.only('should accept caps lock, lowercase, mixed searches and still produce reasonable results', () => {
+    it('should accept caps lock, lowercase, mixed searches and still produce reasonable results', () => {
       cy.get('form').type('thief')
       cy.fixture('/data.js').then((data) => {
           const searchedMovieTitles = data.movieDetails.filter(movie => movie.overview.includes('thief') && movie.overview.includes('THIEF') && movie.overview.includes('Thief') && movie.overview.includes('ThIeF'));
@@ -172,21 +172,13 @@ describe('Rancid Tomatillos', () => {
     });
 
     it('should display an informative message if search yields no results', () => {
-
+      cy.get('form').type('asdfjgl;alskfd')
+      cy.get('div').contains('There are no matches for your search. Try again?')
     });
 
     it('should provide the user with a way to navigate back to the movie library in the event of an error', () => {
-
+      cy.expect(true).to.equal(false)
     });
-
-
-
-
-
-
-
-
-
   });
-
+  
 });
