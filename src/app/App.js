@@ -11,7 +11,8 @@ export default class App extends Component {
     super()
     this.state = {
       movies: [],
-      searchResults: [],
+      isLoaded: false,
+      searchResults: null,
       error: null
     }
   }
@@ -23,7 +24,6 @@ export default class App extends Component {
     return (
         <main className="App">
           <h1>Rancid Tomatillos</h1>
-          <Form filterMovies={this.filterMovies}/>
           <Switch>
             <Route exact path="/" render={() => <MovieContainer movies={this.selectLibrary()} /> } />
             <Route path="/:id" render={(props) => <MovieDetailsCard movieID={props.match.params.id} /> } />
