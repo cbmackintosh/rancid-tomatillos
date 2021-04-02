@@ -1,8 +1,9 @@
 import React from 'react'
 import MoviePoster from '../poster/MoviePoster'
 import './MovieContainer.css'
+import Form from '../search/Form';
 
-const MovieContainer = ({ movies }) => {
+const MovieContainer = ({ movies, filterMovies, isLoaded }) => {
 
   const moviePosters = movies.map(movie => {
     return(
@@ -15,12 +16,21 @@ const MovieContainer = ({ movies }) => {
     )
   })
 
-  return (
-    <div className='movie-container'>
-      {moviePosters}
-    </div>
-  )
-
+  if (isLoaded) {
+    return (
+      <div>
+        <Form filterMovies={filterMovies} />
+        <div className='movie-container'>
+          {moviePosters.length ? moviePosters : <h2>No results</h2>}
+        </div>
+      </div>
+    )
+  } else {
+    return (
+      <h2>Loading...</h2>
+    )
+  }
+  
 }
 
 export default MovieContainer
