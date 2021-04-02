@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchMovieDetails } from '../APICalls'
+import { fetchMovieInfo } from '../APICalls'
 import { Link } from 'react-router-dom';
 import './MovieDetailsCard.css'
 

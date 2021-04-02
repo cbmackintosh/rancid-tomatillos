@@ -21,26 +21,26 @@ export default class App extends Component {
       return (<h2>{this.state.error}</h2>)
     }
     return (
-        <main className="App">
-          <h1>Rancid Tomatillos</h1>
-          <Switch>
-            <Route exact path="/" render={() => 
-              <MovieContainer 
-                movies={this.state.searchResults || this.state.movies}
-                filterMovies={this.filterMovies}
-                isLoaded={this.state.isLoaded} 
-              /> } 
-            />
-            <Route path="/:id" render={(props) => <MovieDetailsCard movieID={props.match.params.id} /> } />
-          </Switch>
-        </main>
+      <main className="App">
+        <h1>Rancid Tomatillos</h1>
+        <Switch>
+          <Route exact path="/" render={() => 
+            <MovieContainer 
+              movies={this.state.searchResults || this.state.movies}
+              filterMovies={this.filterMovies}
+              isLoaded={this.state.isLoaded} 
+            /> } 
+          />
+          <Route path="/:id" render={(props) => <MovieDetailsCard movieID={props.match.params.id} /> } />
+        </Switch>
+      </main>
     )
   }
 
 
   componentDidMount() {
     fetchMovieInfo()
-      .then(movieData => this.setState({movies: movieData.movies}))
+      .then(movieData => this.setState({ movies: movieData.movies, isLoaded: true }))
       .catch(err => this.setState({ error: this.handleErrorResponse(err.message)}));
   }
 
@@ -53,7 +53,7 @@ export default class App extends Component {
   }
 
   filterMovies = (query) => {
-    const filteredList = this.state.movies.filter(movie => movie.title.includes(query))
+    const filteredList = this.state.movies.filter(movie => movie.title.toUpperCase().includes(query.toUpperCase()))
     this.setState({ searchResults: filteredList })
   }
 
