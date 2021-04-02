@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import { fetchAllMovies } from '../APICalls'
 import MovieContainer from '../container/MovieContainer'
@@ -18,26 +18,24 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(this.state)
-    if (!this.state.error) {
-      return (
-        <main className="App">
-          <h1>Rancid Tomatillos</h1>
-          <Switch>
-            <Route exact path="/" render={() => 
-              <MovieContainer
-                movies={this.state.searchResults || this.state.movies}
-                filterMovies={this.filterMovies}
-                isLoaded={this.state.isLoaded}
-              /> } 
-             />
-            <Route path="/:id" render={(props) => <MovieDetailsCard movieID={props.match.params.id} /> } />
-          </Switch> 
-        </main>
-      )
-    } else {
+    if (this.state.error) {
       return (<h2>{this.state.error}</h2>)
     }
+    return (
+      <main className="App">
+        <h1>Rancid Tomatillos</h1>
+        <Switch>
+          <Route exact path="/" render={() => 
+            <MovieContainer
+              movies={this.state.searchResults || this.state.movies}
+              filterMovies={this.filterMovies}
+              isLoaded={this.state.isLoaded}
+            /> } 
+          />
+          <Route path="/:id" render={(props) => <MovieDetailsCard movieID={props.match.params.id} /> } />
+        </Switch> 
+      </main>
+    )
   }
 
   componentDidMount() {
