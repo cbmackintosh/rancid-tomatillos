@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import { fetchMovieInfo } from '../APICalls'
+import { fetchAllMovies } from '../APICalls'
 import MovieContainer from '../container/MovieContainer'
 import MovieDetailsCard from '../details/MovieDetailsCard';
 
@@ -17,6 +17,7 @@ export default class App extends Component {
   }
 
   render() {
+    console.log(this.state)
     if (this.state.error) {
       return (<h2>{this.state.error}</h2>)
     }
@@ -39,8 +40,9 @@ export default class App extends Component {
 
 
   componentDidMount() {
-    fetchMovieInfo()
-      .then(movieData => this.setState({ movies: movieData.movies, isLoaded: true }))
+    fetchAllMovies()
+    .then(data => Promise.all(data))
+      .then(movieData => this.setState({ movies: movieData, isLoaded: true }))
       .catch(err => this.setState({ error: this.handleErrorResponse(err.message)}));
   }
 

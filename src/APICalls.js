@@ -1,6 +1,4 @@
-const baseURL = 'https://rancid-tomatillos.herokuapp.com/api/v2/movies'
-
-exxport const fetchAllMovies = () => {
+export const fetchAllMovies = () => {
   return fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
   .then(checkForErrors)
   .then(movieData => movieData.movies.reduce((acc, movie) => {
@@ -10,7 +8,7 @@ exxport const fetchAllMovies = () => {
 }
 
 export const fetchMovieDetails = (id) => {
-  return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies${id}`)
+  return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
     .then(checkForErrors)
     .then(data => {
       return data.movie
