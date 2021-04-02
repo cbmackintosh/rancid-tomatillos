@@ -19,7 +19,7 @@ class Form extends Component {
     return (
       <form>
         <input
-          class='search-bar'
+          className='search-bar'
           type='text'
           placeholder='Search for movies'
           name='searchInput'

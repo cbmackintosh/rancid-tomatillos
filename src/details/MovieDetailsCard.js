@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchMovieInfo } from '../APICalls'
+import { fetchMovieDetails } from '../APICalls'
 import { Link } from 'react-router-dom';
 import './MovieDetailsCard.css'
 
@@ -54,8 +54,8 @@ class MovieDetailsCard extends Component {
   }
 
   componentDidMount() {
-    fetchMovieInfo(this.state.id)
-    .then(movieDetails => this.setState({movie: movieDetails.movie}))
+    fetchMovieDetails(this.state.id)
+    .then(movieDetails => this.setState({movie: movieDetails}))
     .catch(err => this.setState({error: this.handleErrorResponse(err.message)}))
   }
 
