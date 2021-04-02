@@ -24,7 +24,13 @@ export default class App extends Component {
         <main className="App">
           <h1>Rancid Tomatillos</h1>
           <Switch>
-            <Route exact path="/" render={() => <MovieContainer movies={this.selectLibrary()} filterMovies={this.filterMovies} isLoaded={this.state.isLoaded} /> } />
+            <Route exact path="/" render={() => 
+              <MovieContainer
+                movies={this.state.searchResults || this.state.movies}
+                filterMovies={this.filterMovies}
+                isLoaded={this.state.isLoaded}
+              /> } 
+             />
             <Route path="/:id" render={(props) => <MovieDetailsCard movieID={props.match.params.id} /> } />
           </Switch> 
         </main>
@@ -33,7 +39,6 @@ export default class App extends Component {
       return (<h2>{this.state.error}</h2>)
     }
   }
-
 
   componentDidMount() {
     fetchAllMovies()
@@ -52,14 +57,6 @@ export default class App extends Component {
   filterMovies = (query) => {
     const filteredList = this.state.movies.filter(movie => movie.title.toUpperCase().includes(query.toUpperCase()))
     this.setState( { searchResults: filteredList })
-  }
-
-  selectLibrary = () => {
-    if (this.state.searchResults) {
-      return this.state.searchResults;
-    } else {
-      return this.state.movies
-    }
   }
 
 }
