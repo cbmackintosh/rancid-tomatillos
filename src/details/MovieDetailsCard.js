@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { fetchMovieInfo } from '../APICalls'
 import { Link } from 'react-router-dom';
 import './MovieDetailsCard.css'
+import VideoSection from '../VideoSection/VideoSection'
 
 class MovieDetailsCard extends Component {
   constructor({ movieID }) {
@@ -14,6 +15,7 @@ class MovieDetailsCard extends Component {
   }
 
   render() {
+    console.log(this.state)
     if(this.state.movie && !this.state.error) {
       return (
         <div className='movie-details-card' style={{backgroundImage: `url(${this.state.movie.backdrop_path})`}}>
@@ -38,6 +40,9 @@ class MovieDetailsCard extends Component {
                 </tr>
               </tbody>
             </table>
+            <div>
+              <VideoSection movieID={this.state.id}/>
+            </div>
           </div>
         </div>
       )
