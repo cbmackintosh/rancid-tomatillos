@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { fetchMovieDetails } from '../APICalls'
 import { Link } from 'react-router-dom';
 import './MovieDetailsCard.css'
+import VideoSection from '../VideoSection/VideoSection'
 
 class MovieDetailsCard extends Component {
   constructor({ movieID }) {
@@ -38,6 +39,7 @@ class MovieDetailsCard extends Component {
                 </tr>
               </tbody>
             </table>
+            <VideoSection movieID={this.state.id}/>
           </div>
         </div>
       )
