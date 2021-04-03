@@ -1,7 +1,6 @@
 import React from 'react'
 import MoviePoster from '../poster/MoviePoster'
 import './MovieContainer.css'
-import Form from '../search/Form';
 
 const MovieContainer = ({ movies, filterMovies, isLoaded }) => {
 
@@ -17,9 +16,9 @@ const MovieContainer = ({ movies, filterMovies, isLoaded }) => {
   })
 
   if (isLoaded) {
+    document.querySelector('.search-bar').classList.remove('hidden')
     return (
       <div>
-        <Form filterMovies={filterMovies} />
         <div className='movie-container'>
           {moviePosters.length ? moviePosters : <h2>No results</h2>}
         </div>
@@ -30,7 +29,7 @@ const MovieContainer = ({ movies, filterMovies, isLoaded }) => {
       <h2>Loading...</h2>
     )
   }
-  
+
 }
 
 export default MovieContainer
