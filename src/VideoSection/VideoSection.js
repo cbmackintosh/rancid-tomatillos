@@ -15,14 +15,13 @@ class VideoSection extends Component {
 
   render() {
     if (this.state.videos) {
-      const elements = this.state.videos
-      const items = []
-      for (const [index,value] of elements.entries()) {
-      items.push(<iframe src={value} allowFullScreen />)
+      const iframes = []
+      for (const [index, value] of this.state.videos.entries()) {
+        iframes.push(<iframe src={value} allowFullScreen />)
       }
       return (
         <div>
-          {items}
+          {iframes}
         </div>
       )
     } else {
