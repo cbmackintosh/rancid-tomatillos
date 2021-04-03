@@ -13,6 +13,7 @@ class MovieDetailsCard extends Component {
     }
   }
 
+
   render() {
     document.querySelector('.search-bar').classList.add('hidden')
     if(this.state.movie && !this.state.error) {
