@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { fetchMovieDetails } from '../APICalls'
 import { Link } from 'react-router-dom';
 import './MovieDetailsCard.css'
 import VideoSection from '../VideoSection/VideoSection'
 
 class MovieDetailsCard extends Component {
-  constructor({ movieID }) {
+  constructor({ movie }) {
     super()
     this.state = {
-      id: movieID,
-      movie: null,
+      id: movie.id,
+      movie: movie || null,
       error: null
     }
   }
@@ -53,12 +52,6 @@ class MovieDetailsCard extends Component {
         </div>
       )
     }
-  }
-
-  componentDidMount() {
-    fetchMovieDetails(this.state.id)
-    .then(movieDetails => this.setState({movie: movieDetails}))
-    .catch(err => this.setState({error: this.handleErrorResponse(err.message)}))
   }
 
   handleErrorResponse(error) {

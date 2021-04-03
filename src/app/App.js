@@ -24,14 +24,23 @@ export default class App extends Component {
       <main className="App">
         <h1>Rancid Tomatillos</h1>
         <Switch>
-          <Route exact path="/" render={() => 
-            <MovieContainer 
+          <Route exact path="/" render={() =>
+            <MovieContainer
               movies={this.state.searchResults || this.state.movies}
               filterMovies={this.filterMovies}
-              isLoaded={this.state.isLoaded} 
-            /> } 
+              isLoaded={this.state.isLoaded}
+            /> }
           />
-          <Route path="/:id" render={(props) => <MovieDetailsCard movieID={props.match.params.id} /> } />
+          <Route
+            exact
+            path="/:id"
+            render={({ match }) => {
+              const idMatch = parseInt(match.params.id);
+              const foundMovie = this.state.movies.find(movie => movie.id === idMatch);
+              return <MovieDetailsCard movie={foundMovie}/>
+              }
+            }
+          />
         </Switch>
       </main>
     )
