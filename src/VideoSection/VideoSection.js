@@ -1,6 +1,6 @@
 
 import { Component } from 'react'
-import { fetchMovieDetails } from '../APICalls'
+import { fetchMovieVideos } from '../APICalls'
 
 class VideoSection extends Component {
   constructor({ movieID }) {
@@ -25,9 +25,9 @@ class VideoSection extends Component {
   }
 
   componentDidMount() {
-    fetchMovieDetails(`${this.state.movieID}/videos`)
-      .then(videoData => this.setState({ videos: videoData.videos}))
-      .catch(err => this.setState({ error: err}))
+    fetchMovieVideos(this.state.movieID)
+      .then(videoData => this.setState({ videos: videoData }))
+      .catch(err => this.setState({ error: err.message}))
   }
 
 }

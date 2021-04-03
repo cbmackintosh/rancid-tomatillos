@@ -17,7 +17,6 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(this.state)
     if (this.state.error) {
       return (<h2>{this.state.error}</h2>)
     }
