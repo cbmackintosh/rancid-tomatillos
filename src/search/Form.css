@@ -13,3 +13,7 @@
   opacity: 100%;
   background-color: white;
 }
+
+.hidden {
+  display: none;
+}

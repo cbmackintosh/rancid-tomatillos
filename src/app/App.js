@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import { fetchAllMovies } from '../APICalls'
+import Form from '../search/Form.js'
 import MovieContainer from '../container/MovieContainer'
 import MovieDetailsCard from '../details/MovieDetailsCard';
 
@@ -23,6 +24,7 @@ export default class App extends Component {
     return (
       <main className="App">
         <h1>Rancid Tomatillos</h1>
+        <Form className="search-bar" filterMovies={this.filterMovies} />
         <Switch>
           <Route exact path="/" render={() =>
             <MovieContainer
@@ -63,7 +65,14 @@ export default class App extends Component {
   }
 
   filterMovies = (query) => {
-    const filteredList = this.state.movies.filter(movie => movie.title.toUpperCase().includes(query.toUpperCase()))
+    const formattedQuery = query.toUpperCase();
+
+    const filteredList = this.state.movies.filter(movie => {
+    return movie.title.toUpperCase().includes(formattedQuery)
+    || movie.genres.toString().toUpperCase().includes(formattedQuery)
+    || movie.overview.toUpperCase().includes(formattedQuery)
+  });
+
     this.setState({ searchResults: filteredList })
   }
 
