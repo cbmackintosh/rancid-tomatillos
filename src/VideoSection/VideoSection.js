@@ -1,7 +1,7 @@
 
 import { Component } from 'react'
 import { fetchMovieVideos } from '../APICalls'
-import PropTypes from 'prop-types'
+import ReactPlayer from 'react-player'
 
 class VideoSection extends Component {
   constructor({ movieID }) {
@@ -15,13 +15,13 @@ class VideoSection extends Component {
 
   render() {
     if (this.state.videos) {
-      const iframes = []
+      const videoPlayers = []
       for (const [index, value] of this.state.videos.entries()) {
-        iframes.push(<iframe src={value} allowFullScreen />)
+        videoPlayers.push(<ReactPlayer key={index} url={this.formatURL(value.key, value.site)} />)
       }
       return (
         <div>
-          {iframes}
+          {videoPlayers}
         </div>
       )
     } else {
@@ -31,12 +31,16 @@ class VideoSection extends Component {
 
   componentDidMount() {
     fetchMovieVideos(this.state.movieID)
-      .then(videoData => this.setState({ videos: this.formatEmbedIds(videoData) }))
+      .then(videoData => this.setState({ videos: videoData }))
       .catch(err => this.setState({ error: err.message}))
   }
 
-  formatEmbedIds(videoData) {
-    return videoData.map(video => video.key = `https://www.youtube.com/embed/${video.key}`)
+  formatURL(key, site) {
+    if (site === "Vimeo") {
+      return `https://www.vimeo.com/${key}`
+    } else if (site === "YouTube") {
+      return `www.youtube.com/watch?v=${key}`
+    }
   }
 
 }
