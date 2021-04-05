@@ -16,9 +16,6 @@ class MovieDetailsCard extends Component {
 
 
   render() {
-    if (document.querySelector('.search-bar')) {
-      document.querySelector('.search-bar').classList.add('hidden')
-    }
     if(this.state.movie && !this.state.error) {
       return (
         <div className='movie-details-card' style={{backgroundImage: `url(${this.state.movie.backdrop_path})`}}>
