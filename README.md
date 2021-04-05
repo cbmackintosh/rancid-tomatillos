@@ -25,6 +25,7 @@ The goal of this project was to create an app using the React JavaScript framewo
 ## Planning Resources
 
 [Agile Project Board](https://trello.com/b/R8nluThL/rancid-tomatillos)
+
 [Design Inspiration / Wireframes](https://gist.github.com/cbmackintosh/3afd9ceb822770a4fc98bd58c08e6635)
 
 
