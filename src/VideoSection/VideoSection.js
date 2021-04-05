@@ -20,10 +20,12 @@ class VideoSection extends Component {
         videoPlayers.push(<ReactPlayer key={index} url={this.formatURL(value.key, value.site)} />)
       }
       return (
-        <div>
+        <div className="video-section">
           {videoPlayers}
         </div>
       )
+    } else if (this.state.error) {
+      return (<h2>{this.state.error}</h2>)
     } else {
       return (<h2>Loading...</h2>)
     }
@@ -32,7 +34,15 @@ class VideoSection extends Component {
   componentDidMount() {
     fetchMovieVideos(this.state.movieID)
       .then(videoData => this.setState({ videos: videoData }))
-      .catch(err => this.setState({ error: err.message}))
+      .catch(err => this.setState({ error: this.handleErrorResponse(err.message)}))
+  }
+
+  handleErrorResponse(error) {
+    if (error < 500) {
+      return "Sorry, we couldn't find the videos for this movie."
+    } else {
+      return "Something went wrong. Please try again later"
+    }
   }
 
   formatURL(key, site) {

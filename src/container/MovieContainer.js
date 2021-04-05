@@ -21,7 +21,7 @@ const MovieContainer = ({ movies, filterMovies, isLoaded, rememberSearchQuery })
       <div>
         <Form className="search-bar" filterMovies={filterMovies} rememberSearchQuery={rememberSearchQuery} />
         <div className='movie-container'>
-          {moviePosters.length ? moviePosters : <h2>No results</h2>}
+          {moviePosters.length ? moviePosters : <h2>There are no matches for your search. Try again?</h2>}
         </div>
       </div>
     )
