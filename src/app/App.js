@@ -27,14 +27,22 @@ export default class App extends Component {
         <Form className="search-bar" filterMovies={this.filterMovies} />
         <Switch>
           <Route exact path="/" render={() =>
-
             <MovieContainer
               movies={this.state.searchResults || this.state.movies}
               filterMovies={this.filterMovies}
               isLoaded={this.state.isLoaded}
-            />
-          } />
-          <Route path="/:id" render={(props) => <MovieDetailsCard movieID={props.match.params.id} /> } />
+            /> }
+          />
+          <Route
+            exact
+            path="/:id"
+            render={({ match }) => {
+              const idMatch = parseInt(match.params.id);
+              const foundMovie = this.state.movies.find(movie => movie.id === idMatch);
+              return <MovieDetailsCard movieID={idMatch} movie={foundMovie}/>
+              }
+            }
+          />
         </Switch>
       </main>
     )

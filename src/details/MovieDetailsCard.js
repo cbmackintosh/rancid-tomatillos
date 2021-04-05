@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
-import { fetchMovieDetails } from '../APICalls'
 import { Link } from 'react-router-dom';
-import './MovieDetailsCard.css'
-import VideoSection from '../VideoSection/VideoSection'
+import './MovieDetailsCard.css';
+import VideoSection from '../VideoSection/VideoSection';
+import { fetchMovieDetails } from '../APICalls';
 
 class MovieDetailsCard extends Component {
-  constructor({ movieID }) {
+  constructor({ movieID, movie }) {
     super()
     this.state = {
       id: movieID,
-      movie: null,
+      movie: movie || null,
       error: null
     }
   }
 
+
   render() {
-    document.querySelector('.search-bar').classList.add('hidden')
+    if (document.querySelector('.search-bar')) {
+      document.querySelector('.search-bar').classList.add('hidden')
+    }
     if(this.state.movie && !this.state.error) {
       return (
         <div className='movie-details-card' style={{backgroundImage: `url(${this.state.movie.backdrop_path})`}}>
@@ -57,9 +60,13 @@ class MovieDetailsCard extends Component {
   }
 
   componentDidMount() {
-    fetchMovieDetails(this.state.id)
-    .then(movieDetails => this.setState({movie: movieDetails}))
-    .catch(err => this.setState({error: this.handleErrorResponse(err.message)}))
+    if (!this.state.movie) {
+      fetchMovieDetails(this.state.id)
+      .then(movieDetails => {
+        this.setState({ movie: movieDetails })
+      })
+      .catch(err => this.setState({error: this.handleErrorResponse(err.message)}))
+    }
   }
 
   handleErrorResponse(error) {
