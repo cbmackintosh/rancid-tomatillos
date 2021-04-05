@@ -39,7 +39,7 @@ export default class App extends Component {
             render={({ match }) => {
               const idMatch = parseInt(match.params.id);
               const foundMovie = this.state.movies.find(movie => movie.id === idMatch);
-              return <MovieDetailsCard movie={foundMovie}/>
+              return <MovieDetailsCard movieID={idMatch} movie={foundMovie}/>
               }
             }
           />
