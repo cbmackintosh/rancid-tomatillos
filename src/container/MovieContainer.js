@@ -1,8 +1,9 @@
 import React from 'react'
 import MoviePoster from '../poster/MoviePoster'
 import './MovieContainer.css'
+import Form from '../search/Form.js'
 
-const MovieContainer = ({ movies, filterMovies, isLoaded }) => {
+const MovieContainer = ({ movies, filterMovies, isLoaded, rememberSearchQuery }) => {
 
   const moviePosters = movies.map(movie => {
     return(
@@ -16,11 +17,11 @@ const MovieContainer = ({ movies, filterMovies, isLoaded }) => {
   })
 
   if (isLoaded) {
-    document.querySelector('.search-bar').classList.remove('hidden')
     return (
       <div>
+        <Form className="search-bar" filterMovies={filterMovies} rememberSearchQuery={rememberSearchQuery} />
         <div className='movie-container'>
-          {moviePosters.length ? moviePosters : <h2>No results</h2>}
+          {moviePosters.length ? moviePosters : <h2>There are no matches for your search. Try again?</h2>}
         </div>
       </div>
     )

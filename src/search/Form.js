@@ -23,7 +23,7 @@ class Form extends Component {
           type='text'
           placeholder='Search for movies'
           name='searchInput'
-          value={this.state.searchInput}
+          value={this.props.rememberSearchQuery || this.state.searchInput}
           onChange={event => this.handleChange(event)}
         />
       </form>

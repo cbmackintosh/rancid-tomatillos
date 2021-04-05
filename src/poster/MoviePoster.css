@@ -11,7 +11,17 @@
   padding: 10px;
 }
 
+.poster-image:hover {
+  transform: scale(1.1);
+}
+
 img {
   width: 100%;
   box-shadow: 0px 0px 200px black;
+}
+
+.movie-poster-title {
+  text-decoration: none;
+  color: white;
+  justify-content: center;
 }

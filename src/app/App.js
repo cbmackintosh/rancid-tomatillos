@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import './App.css';
 import { fetchAllMovies } from '../APICalls'
-import Form from '../search/Form.js'
 import MovieContainer from '../container/MovieContainer'
 import MovieDetailsCard from '../details/MovieDetailsCard';
 
@@ -13,24 +12,33 @@ export default class App extends Component {
       movies: [],
       isLoaded: false,
       searchResults: null,
-      error: null
+      error: null,
+      rememberSearchQuery: ''
     }
   }
 
   render() {
     if (this.state.error) {
-      return (<h2>{this.state.error}</h2>)
+      return (
+        <main className="App">
+          <Link to={"/"}><h1 className="website-header">Rancid Tomatillos</h1></Link>
+          <div className="app-error">
+            <h3 className="app-error-message">{this.state.error}</h3>
+            <button className="refresh-button" onClick={()=> window.location.reload(false)}>TRY AGAIN</button>
+          </div>
+        </main>    
+      )
     }
     return (
       <main className="App">
-        <h1>Rancid Tomatillos</h1>
-        <Form className="search-bar" filterMovies={this.filterMovies} />
+        <Link to={"/"}><h1 className="website-header">Rancid Tomatillos</h1></Link>
         <Switch>
           <Route exact path="/" render={() =>
             <MovieContainer
               movies={this.state.searchResults || this.state.movies}
               filterMovies={this.filterMovies}
               isLoaded={this.state.isLoaded}
+              rememberSearchQuery={this.state.rememberSearchQuery}
             /> }
           />
           <Route
@@ -58,15 +66,15 @@ export default class App extends Component {
 
   handleErrorResponse(error) {
     if (error < 500) {
-      return 'This is a 400 error message on the Movie Library Page'
+      return "Sorry, something went wrong. Please try again later."
     } else {
-      return 'This is a 500 error message on the Movie Library Page'
+      return "Sorry, something's wrong with our system. Please try again later."
     }
   }
 
   filterMovies = (query) => {
+    this.setState({ rememberSearchQuery: query })
     const formattedQuery = query.toUpperCase();
-
     const filteredList = this.state.movies.filter(movie => {
     return movie.title.toUpperCase().includes(formattedQuery)
     || movie.genres.toString().toUpperCase().includes(formattedQuery)

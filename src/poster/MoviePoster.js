@@ -9,7 +9,9 @@ const MoviePoster = ({id, poster_path, title}) => {
         <Link to={`/${id}`}>
           <img src={poster_path} alt={title}/>
         </Link>
-        <h2>{title}</h2>
+        <Link to={`/${id}`}>
+          <h2 className="movie-poster-title">{title}</h2>
+        </Link>
       </div>
     </div>
   )
