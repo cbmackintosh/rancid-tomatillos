@@ -17,7 +17,7 @@ describe('Rancid Tomatillos', () => {
       cy.get('form').should('be.visible')
     });
 
-    it.only('should show an informative Unprocessable Entity error message', () => {
+    it('should show an informative Unprocessable Entity error message', () => {
       cy.get('h2').contains('Loading...')
       cy.intercept({
           method: 'GET',
@@ -29,7 +29,7 @@ describe('Rancid Tomatillos', () => {
         cy.wait(5000).get('h3').contains('Sorry, something went wrong. Please try again later.')
     });
 
-    it('should show an informative error message when the server is down', () => {
+    it.only('should show an informative error message when the server is down', () => {
       cy.intercept({
           method: 'GET',
           url: 'https://rancid-tomatillos.herokuapp.com/api/v2/movies'
@@ -37,7 +37,7 @@ describe('Rancid Tomatillos', () => {
         {
           statusCode: 500,
         })
-        cy.wait(5000).get('h2').contains('This is a 500 error message on the Movie Library Page')
+        cy.wait(5000).get('h3').contains(`Sorry, something's wrong with our system. Please try again later.`)
     });
   });
 
