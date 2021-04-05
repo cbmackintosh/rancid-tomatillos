@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import './App.css';
 import { fetchAllMovies } from '../APICalls'
 import MovieContainer from '../container/MovieContainer'
@@ -28,7 +28,7 @@ export default class App extends Component {
     }
     return (
       <main className="App">
-        <h1>Rancid Tomatillos</h1>
+        <Link to={"/"}><h1 className="website-header">Rancid Tomatillos</h1></Link>
         <Switch>
           <Route exact path="/" render={() =>
             <MovieContainer
