@@ -19,7 +19,12 @@ export default class App extends Component {
 
   render() {
     if (this.state.error) {
-      return (<h2>{this.state.error}</h2>)
+      return (
+        <div>
+          <h2>{this.state.error}</h2>
+          <button onClick={()=> window.location.reload(false)}>Try Again</button>
+        </div>
+      )
     }
     return (
       <main className="App">
