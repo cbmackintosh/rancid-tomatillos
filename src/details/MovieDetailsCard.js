@@ -26,7 +26,7 @@ class MovieDetailsCard extends Component {
             <p>{this.state.movie.overview}</p>
             <p>{this.formatGenreString(this.state.movie.genres) + ' * ' + this.state.movie.release_date + ' * ' + this.formatRuntimeString(this.state.movie.runtime)}</p>
             <p>AVERAGE RATING: {this.state.movie.average_rating.toFixed(2)}</p>
-            {!this.state.movie.budget || !this.state.movie.revenue && <table>
+            <table>
               <thead>
                 <tr>
                   <th>BUDGET</th>
@@ -35,11 +35,11 @@ class MovieDetailsCard extends Component {
               </thead>
               <tbody>
                 <tr>
-                  <td>${this.state.movie.budget.toLocaleString()}</td>
-                  <td>${this.state.movie.revenue.toLocaleString()}</td>
+                  <td>{this.state.movie.budget ? '$' + this.state.movie.budget.toLocaleString() : "NOT AVAILABLE"}</td>
+                  <td>{this.state.movie.revenue ? '$' + this.state.movie.revenue.toLocaleString() : "NOT AVAILABLE"}</td>
                 </tr>
               </tbody>
-            </table>}
+            </table>
             <VideoSection movieID={this.state.id}/>
           </div>
         </div>
