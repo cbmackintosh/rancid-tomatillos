@@ -29,7 +29,7 @@ describe('Rancid Tomatillos', () => {
         cy.wait(5000).get('h3').contains('Sorry, something went wrong. Please try again later.')
     });
 
-    it.only('should show an informative error message when the server is down', () => {
+    it('should show an informative error message when the server is down', () => {
       cy.intercept({
           method: 'GET',
           url: 'https://rancid-tomatillos.herokuapp.com/api/v2/movies'
@@ -43,7 +43,7 @@ describe('Rancid Tomatillos', () => {
 
   describe('Movie Details', () => {
 
-    it('should be able to click on a single movie poster to display that movies details', () => {
+    it.only(`should be able to click on a single movie poster to display that movie's details`, () => {
       cy.fixture('data').then(data => {
 
         cy.get('div[id="694919"]').click()
@@ -55,8 +55,8 @@ describe('Rancid Tomatillos', () => {
         cy.get('p').contains(movieOne.overview)
         cy.get('p').contains('Action * 2020-09-29 * 1h 22m')
         cy.get('p').contains(movieOne.average_rating)
-        cy.get('td').contains(movieOne.budget)
-        cy.get('td').contains(movieOne.revenue)
+        cy.get('td').contains(`NOT AVAILABLE`)
+        cy.get('td').contains(`NOT AVAILABLE`)
 
         cy.get('button[class="close-button"]').click()
 
