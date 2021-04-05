@@ -48,8 +48,8 @@ class MovieDetailsCard extends Component {
       return (<h2>Loading...</h2>)
     } else if (!this.state.movie && this.state.error) {
       return (
-        <div>
-          <h2>{this.state.error}</h2>
+        <div className="movie-details-error">
+          <h2 className="movie-details-error-message">{this.state.error}</h2>
           <Link to={`/`}><button className='back-button'>BACK</button></Link>
         </div>
       )
@@ -68,9 +68,9 @@ class MovieDetailsCard extends Component {
 
   handleErrorResponse(error) {
     if (error < 500) {
-      return 'This is a 400 error message on the Movie Details Card'
+      return "Sorry, we were unable to find this title."
     } else {
-      return 'This is a 500 error message on the Movie Details Card'
+      return "Sorry, something's wrong with our system. Please try again later"
     }
   }
 

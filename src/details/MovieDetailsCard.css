@@ -40,3 +40,25 @@ table {
   opacity: 100%;
   background-color: white;
 }
+
+.movie-details-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid lightcoral;
+  border-radius: 5px;
+  padding: 2%;
+}
+
+.movie-details-error-message {
+  color: lightcoral;
+}
+
+.back-button {
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+}

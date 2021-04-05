@@ -79,7 +79,7 @@ describe('Rancid Tomatillos', () => {
       cy.get('div[class="movie-container"]').should('be.visible')
     });
 
-    it('should display an appropriate error message if the network request returns a 400 error', () => {
+    it.only('should display an appropriate error message if the network request returns a 400 error', () => {
       cy.intercept({
         method: 'GET',
         url: 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919'
