@@ -14,7 +14,8 @@ describe('Rancid Tomatillos', () => {
       cy.get('form').should('be.visible')
     });
 
-    it('should show an informative Unprocessable Entity error message', () => {
+    it.only('should show an informative Unprocessable Entity error message', () => {
+      cy.wait(1000).get('h2').contains('Loading...')
       cy.intercept({
           method: 'GET',
           url: 'https://rancid-tomatillos.herokuapp.com/api/v2/movies'
@@ -22,8 +23,7 @@ describe('Rancid Tomatillos', () => {
         {
           statusCode: 422,
         })
-        cy.visit('http://localhost:3000')
-        .get('h2').contains('This is a 400 error message on the Movie Library Page')
+        cy.wait(5000).get('h2').contains('This is a 400 error message on the Movie Library Page')
     });
 
     it('should show an informative error message when the server is down', () => {
@@ -180,5 +180,5 @@ describe('Rancid Tomatillos', () => {
       cy.expect(true).to.equal(false)
     });
   });
-  
+
 });
