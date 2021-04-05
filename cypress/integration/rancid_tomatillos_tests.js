@@ -17,7 +17,7 @@ describe('Rancid Tomatillos', () => {
       cy.get('form').should('be.visible')
     });
 
-    it('should show an informative Unprocessable Entity error message', () => {
+    it.only('should show an informative Unprocessable Entity error message', () => {
       cy.get('h2').contains('Loading...')
       cy.intercept({
           method: 'GET',
@@ -26,7 +26,7 @@ describe('Rancid Tomatillos', () => {
         {
           statusCode: 422,
         })
-        cy.wait(5000).get('h2').contains('This is a 400 error message on the Movie Library Page')
+        cy.wait(5000).get('h3').contains('Sorry, something went wrong. Please try again later.')
     });
 
     it('should show an informative error message when the server is down', () => {
@@ -76,6 +76,9 @@ describe('Rancid Tomatillos', () => {
       cy.get('div[class="movie-details-card"]').should('not.exist')
       cy.get('div[class="movie-container"]').should('be.visible')
     });
+
+
+//These may occur on page reload
 
     // it('should display an appropriate error message if the network request returns a 400 error', () => {
     //   cy.get('input').type('action')
