@@ -20,10 +20,13 @@ export default class App extends Component {
   render() {
     if (this.state.error) {
       return (
-        <div>
-          <h2>{this.state.error}</h2>
-          <button onClick={()=> window.location.reload(false)}>Try Again</button>
-        </div>
+        <main className="App">
+          <Link to={"/"}><h1 className="website-header">Rancid Tomatillos</h1></Link>
+          <div className="app-error">
+            <h3 className="app-error-message">{this.state.error}</h3>
+            <button className="refresh-button" onClick={()=> window.location.reload(false)}>TRY AGAIN</button>
+          </div>
+        </main>    
       )
     }
     return (
@@ -63,9 +66,9 @@ export default class App extends Component {
 
   handleErrorResponse(error) {
     if (error < 500) {
-      return 'This is a 400 error message on the Movie Library Page'
+      return "Sorry, something went wrong. Please try again later."
     } else {
-      return 'This is a 500 error message on the Movie Library Page'
+      return "Sorry, something's wrong with our system. Please try again later."
     }
   }
 
