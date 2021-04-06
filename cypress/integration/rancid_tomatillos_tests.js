@@ -39,6 +39,13 @@ describe('Rancid Tomatillos', () => {
         })
         cy.wait(5000).get('h3').contains(`Sorry, something's wrong with our system. Please try again later.`)
     });
+
+    it('should be able to click on header and return to main library', () => {
+      cy.wait(2000).get('div[id="694919"]').click()
+      .get('h1[class="website-header"]').click()
+      .get('div[class="movie-details-card"]').should('not.exist')
+      .get('div[class="movie-container"]').should('exist')
+    })
   });
 
   describe('Movie Details', () => {
@@ -76,35 +83,6 @@ describe('Rancid Tomatillos', () => {
       cy.get('div[class="movie-details-card"]').should('not.exist')
       cy.get('div[class="movie-container"]').should('be.visible')
     });
-
-
-//These may occur on page reload
-
-    // it('should display an appropriate error message if the network request returns a 400 error', () => {
-    //   cy.get('input').type('action')
-    //   cy.intercept({
-    //     method: 'GET',
-    //     url: 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919'
-    //   },
-    //   {
-    //     statusCode: 404,
-    //   })
-    //   cy.wait(5000).reload()
-    //   cy.wait(5000).get('h2').contains('This is a 400 error message on the Movie Details Card')
-    // });
-    //
-    // it.only('should display an appropriate error message if the network request returns a 500 error', () => {
-    //   cy.get('div[id="694919"]').click()
-    //   cy.intercept({
-    //     method: 'GET',
-    //     url: 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919'
-    //   },
-    //   {
-    //     statusCode: 500,
-    //   })
-    //   cy.wait(5000).reload()
-    //   .get('h2').contains('This is a 500 error message on the Movie Details Card')
-    // });
 
     it('should provide the user with a way to navigate back to the movie library in the event of an error', () => {
       cy.get('div[id="694919"]').click()
