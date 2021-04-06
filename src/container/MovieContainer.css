@@ -6,6 +6,17 @@
   grid-gap: 5px;
 }
 
+.loading {
+  text-align: center;
+  font-size: 25px;
+  color: lightcoral;
+}
+
+.no-results {
+  color: lightcoral;
+  text-align: center;
+}
+
 @media screen and (max-width: 1025px) {
 
   .movie-container {

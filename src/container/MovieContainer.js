@@ -20,14 +20,15 @@ const MovieContainer = ({ movies, filterMovies, isLoaded, rememberSearchQuery })
     return (
       <div>
         <Form className="search-bar" filterMovies={filterMovies} rememberSearchQuery={rememberSearchQuery} />
-        <div className='movie-container'>
-          {moviePosters.length ? moviePosters : <h2>There are no matches for your search. Try again?</h2>}
-        </div>
+        {!moviePosters.length && <h3 className="no-results">There are no matches for your search. Try again?</h3>}
+        {moviePosters.length > 0 && <div className='movie-container'>
+          {moviePosters}
+        </div>}
       </div>
     )
   } else {
     return (
-      <h2>Loading...</h2>
+      <h3 className="loading">Loading...</h3>
     )
   }
 
