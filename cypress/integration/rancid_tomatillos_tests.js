@@ -159,9 +159,9 @@ describe('Rancid Tomatillos', () => {
       });
     });
 
-    it('should not be visible on Movie Details view', () => {
+    it.only('should not be visible on Movie Details view', () => {
       cy.get('div[id="694919"]').click()
-      cy.get('form').should('not.be.visible')
+      cy.get('form').should('not.exist')
     });
 
     it('should accept caps lock, lowercase, mixed searches and still produce reasonable results', () => {
