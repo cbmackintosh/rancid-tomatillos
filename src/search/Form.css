@@ -14,7 +14,7 @@ form {
 }
 
 .search-bar:hover {
-  opacity: 100%;
+  opacity: 0.1;
   background-color: white;
 }
 
