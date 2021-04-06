@@ -51,10 +51,12 @@ The goal of this project was to create an app using the React JavaScript framewo
 ## Features
 
 ### Accessibility
+
 (Don't forget an accessibility screenshot here)
 
 ### Testing
-(screenshot or gif)
+
+![](https://media.giphy.com/media/zUfbXEX13Z2AdamfdM/giphy.gif)
 
 ### Searching Film Library
 (gif)
