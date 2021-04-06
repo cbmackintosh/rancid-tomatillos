@@ -2,6 +2,7 @@
 import { Component } from 'react'
 import { fetchMovieVideos } from '../APICalls'
 import ReactPlayer from 'react-player'
+import './VideoSection.css'
 
 class VideoSection extends Component {
   constructor({ movieID }) {
@@ -17,7 +18,7 @@ class VideoSection extends Component {
     if (this.state.videos) {
       const videoPlayers = []
       for (const [index, value] of this.state.videos.entries()) {
-        videoPlayers.push(<ReactPlayer key={index} url={this.formatURL(value.key, value.site)} />)
+        videoPlayers.push(<ReactPlayer className="react-player" key={index} url={this.formatURL(value.key, value.site)} width="100%" height="40vh"/>)
       }
       return (
         <div className="video-section">

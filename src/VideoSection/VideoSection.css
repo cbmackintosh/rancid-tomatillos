@@ -1,0 +1,20 @@
+
+.video-section {
+  width: 40%;
+}
+
+.react-player {
+  margin: 2%;
+}
+
+@media screen and (max-width: 700px) {
+
+  .video-section {
+    width: 100%;
+  }
+
+  .react-player {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
