@@ -56,7 +56,7 @@ The goal of this project was to create an app using the React JavaScript framewo
 
 ### Testing
 
-<img width="1440" alt="Screen Shot 2021-04-05 at 6 23 00 PM" src="https://user-images.githubusercontent.com/73088654/113643282-3585cf80-963f-11eb-9286-32f0c9fb62b7.png">
+<img width="1328" alt="Screen Shot 2021-04-05 at 6 51 31 PM" src="https://user-images.githubusercontent.com/73088654/113643627-f60bb300-963f-11eb-9b7a-9e61814bdad0.png">
 
 
 ### Searching Film Library
