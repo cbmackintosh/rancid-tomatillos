@@ -18,7 +18,7 @@ describe('Rancid Tomatillos', () => {
     });
 
     it('should show an informative Unprocessable Entity error message', () => {
-      cy.get('h2').contains('Loading...')
+      cy.get('h3').contains('Loading...')
       cy.intercept({
           method: 'GET',
           url: 'https://rancid-tomatillos.herokuapp.com/api/v2/movies'
