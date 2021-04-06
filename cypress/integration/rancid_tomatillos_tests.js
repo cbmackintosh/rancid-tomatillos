@@ -43,7 +43,7 @@ describe('Rancid Tomatillos', () => {
 
   describe('Movie Details', () => {
 
-    it.only(`should be able to click on a single movie poster to display that movie's details`, () => {
+    it(`should be able to click on a single movie poster to display that movie's details`, () => {
       cy.fixture('data').then(data => {
 
         cy.get('div[id="694919"]').click()
@@ -107,17 +107,16 @@ describe('Rancid Tomatillos', () => {
     // });
 
     it('should provide the user with a way to navigate back to the movie library in the event of an error', () => {
+      cy.get('div[id="694919"]').click()
       cy.intercept({
         method: 'GET',
         url: 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919'
       },
       {
-        statusCode: 500,
+        statusCode: 404,
       })
-      .get('div[id="694919"]').click()
-      .get('button[class="back-button"]').click()
-      cy.get('div[class="movie-details-card"]').should('not.exist')
-      cy.get('div[class="movie-container"]').should('be.visible')
+      cy.reload()
+      .get('button[class="refresh-button"]').should('exist')
     });
   });
 
