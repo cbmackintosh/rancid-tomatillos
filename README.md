@@ -56,7 +56,8 @@ The goal of this project was to create an app using the React JavaScript framewo
 
 ### Testing
 
-![](https://media.giphy.com/media/zUfbXEX13Z2AdamfdM/giphy.gif)
+<img width="1440" alt="Screen Shot 2021-04-05 at 6 23 00 PM" src="https://user-images.githubusercontent.com/73088654/113643282-3585cf80-963f-11eb-9286-32f0c9fb62b7.png">
+
 
 ### Searching Film Library
 (gif)
