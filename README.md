@@ -92,13 +92,3 @@ The goal of this project was to create an app using the React JavaScript framewo
   * Implement local storage to avoid page refresh issues
 
 
-
-
-
-
-
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
